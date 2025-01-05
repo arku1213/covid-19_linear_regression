@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--
+Font-awesome icons ie github or twitter
+-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+
+<!--
+Google fonts api stuff
+-->
+
+
+
+<title>The Relationship Between a Country’s Developmental Status and the Severity of COVID-19 Caused Deaths</title>
+
+
+
+
+
+
+<style>
+@page {
+size: 45in 38in;
+margin: 0;
+padding: 0;
+}
+body {
+margin: 0;
+font-size: 45px;
+width: 45in;
+height: 38in;
+padding: 0;
+text-align: justify;
+font-family: Palatino;
+}
+.poster_wrap {
+width: 45in;
+height: 38in;
+padding: 0cm;
+}
+.title_container {
+width: 45in;
+height: calc(38in * 0.15);
+overflow: hidden;
+background-color: #0b4545;
+border: 0 solid #0b4545;
+}
+.logo_left {
+float: left;
+width: 10%;
+height: 100%;
+background-color: #0b4545;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.logo_right {
+float: right;
+width: 10%;
+height: 100%;
+background-color: #0b4545;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.poster_title {
+text-align: center;
+position: relative;
+float: left;
+width: 80%;
+height: 100%;
+color: #FFFFFF;
+top: 50%;
+transform: translateY(-50%);
+-webkit-transform: translateY(-50%);
+}
+#title {
+font-family: Palatino;
+}
+/* unvisited link */
+a:link {
+color: #cc0000;
+}
+.mybreak {
+  break-before: column;
+}
+/* visited link */
+a:visited {
+color: #cc0000;
+}
+
+/* mouse over link */
+a:hover {
+color: #cc0000;
+}
+
+/* selected link */
+a:active {
+color: #cc0000;
+}
+.poster_body {
+-webkit-column-count: 3; /* Chrome, Safari, Opera */
+-moz-column-count: 3; /* Firefox */
+column-count: 3;
+-webkit-column-fill: auto;
+-moz-column-fill: auto;
+column-fill: auto;
+-webkit-column-rule-width: 1mm;
+-moz-column-rule-width: 1mm;
+column-rule-width: 1mm;
+-webkit-column-rule-style: dashed;
+-moz-column-rule-style: dashed;
+column-rule-style: dashed;
+-webkit-column-rule-color: #0b4545;
+-moz-column-rule-color: #0b4545;
+column-rule-color: #0b4545;
+column-gap: 1em;
+padding-left: 0.5em;
+padding-right: 0.5em;
+height: 100%;
+color: #000000
+background-color: #ffffff;
+}
+.poster_title h1 {
+font-size: 75pt;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+.poster_body_wrap{
+width: calc(45in + 0 + 0);
+height: calc(38in * 0.83);
+padding-top: calc(38in * 0.005);
+padding-bottom: calc(38in * 0.01);
+background-color: #ffffff;
+}
+.poster_title h3 {
+color: #ffffff;
+font-size: 50pt;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+.poster_title h3 > sup {
+  font-size: 35pt;
+  margin-left: 0.02em;
+}
+.poster_title h5 {
+color: #FFFFFF;
+font-size: 35pt;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+img {
+margin-top: 2cm;
+margin-bottom: 0;
+}
+.section {
+  padding: 0.2em;
+}
+.poster_body h1 {
+text-align: center;
+color: #FFFFFF;
+font-size: 65pt;
+border: 2mm solid #0b4545;
+background-color: #0b4545;
+border-radius: 4mm 0mm;
+margin-top: 2mm;
+margin-bottom: 2mm;
+font-weight: normal;
+}
+.poster_body h2 {
+color: #000000;
+font-size: 40pt;
+padding-left: 4mm;
+font-weight: normal;
+}
+.span {
+width: 200%;
+}
+/* center align leaflet map,
+from https://stackoverflow.com/questions/52112119/center-leaflet-in-a-rmarkdown-document */
+.html-widget {
+margin: auto;
+position: sticky;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+.leaflet.html-widget.html-widget-static-bound.leaflet-container.leaflet-touch.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+position: sticky;
+width: 100%;
+}
+pre.sourceCode.r {
+background-color: #dddddd40;
+border-radius: 4mm;
+padding: 4mm;
+width: 75%;
+/* align-items: center; */
+margin: auto;
+padding-left: 2cm;
+}
+code.sourceCode.r{
+background-color: transparent;
+font-size: 20pt;
+border-radius: 2mm;
+}
+.caption {
+font-size: 25pt;
+}
+.table caption {
+font-size: 25pt;
+padding-bottom: 3mm;
+
+}
+code {
+font-size: 1em;
+font-family: monospace;
+background-color: #00808024;
+color: #0b4545;
+padding: 1.2mm;
+border-radius: 2mm;
+}
+.poster_title code {
+font-size: 1em;
+}
+table {
+font-size: 40px;
+margin: auto;
+border-top: 3px solid #666;
+border-bottom: 3px solid #666;
+}
+table thead th {
+border-bottom: 3px solid #ddd;
+}
+td {
+padding: 8px;
+}
+th {
+padding: 15px;
+}
+caption {
+margin-bottom: 10px;
+}
+.poster_body p {
+margin-right: 4mm;
+margin-left: 4mm;
+margin-top: 6mm;
+margin-bottom: 10mm;
+}
+.poster_body ol {
+margin-right: 4mm;
+margin-left: 4mm;
+}
+#ul {
+margin-right: 4mm;
+margin-left: 4mm;
+}
+.references p {
+font-size: 20pt;
+}
+.orcid img {
+  width: 1em;
+}
+</style>
+</head>
+<body>
+
+
+<div class="poster_wrap">
+<div class="title_container">
+<!-- Left Logo  -->
+<div class="logo_left">
+</div>
+<!-- Poster Title -->
+<div class= "poster_title">
+<h1 id="title">The Relationship Between a Country’s Developmental Status and the Severity of COVID-19 Caused Deaths</h1>
+<h3 id="author">Jacob Tweel, Jeremiah Osorio, Arnab Kundu, Pranav Bangla<sup></sup></h3><br>
+<h5 id="affiliation"><sup></sup> University of Prince Edward Island</h5>
+</div>
+<!-- Right Logo  -->
+<div class="logo_right">
+</div>
+</div>
+
+<div class='poster_body_wrap'>
+<div class='poster_body'>
+<p>We wanted to determine whether a country’s economic and developmental level in the prior year had a relationship with how they handled the COVID-19 pandemic. We felt we could determine this by whether a country’s GDP per capita, child mortality rate, and poverty rate (all from 2019) share a relationship with the total COVID-19 deaths per million people during the COVID-19 pandemic.</p>
+<p>Our initial hypothesis is that countries with a higher GDP per capita, lower child mortality rate, and lower poverty rate will have a lower number of total COVID-19 deaths per million people during the COVID-19 pandemic. This was thought because countries that were deemed more developed would better deal with the severity of the pandemic.</p>
+<p>The outcome variable we’re looking at is Total COVID-19 Deaths per million (as this would help put it in perspective of a country’s population). We then looked at 4 explanatory variables, 3 being numerical (GDP Per Capita, Child Mortality Rate, Poverty Rate) and 1 being categorical (Region). The 3 numerical variables have use in determining a country’s developmental status. The categorical variable was separated into 4 geographical regions as opposed to cultural regions, these are Africa, Asia &amp; Oceania, Americas, and Europe.</p>
+<p>The COVID-19 related data was collected from Kaggle but originates from the Worldometer website. Worldometer collected their COVID-19 data from the John Hopkins Coronavirus Tracking Global Dashboard, which is regarded as the most accurate and trusted source of information for the pandemic. The additional data of the numerical explanatory variables was collected from GapMinder.</p>
+<table style="font-size: 0.9em; overflow-x: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+1504.0956783
+</td>
+<td style="text-align:right;">
+274.2239914
+</td>
+<td style="text-align:right;">
+5.484916
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gdp_pcap_2019
+</td>
+<td style="text-align:right;">
+-0.0139176
+</td>
+<td style="text-align:right;">
+0.0042127
+</td>
+<td style="text-align:right;">
+-3.303709
+</td>
+<td style="text-align:right;">
+0.0011512
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+region1
+</td>
+<td style="text-align:right;">
+-314.4507110
+</td>
+<td style="text-align:right;">
+216.8602210
+</td>
+<td style="text-align:right;">
+-1.450016
+</td>
+<td style="text-align:right;">
+0.1487944
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+region2
+</td>
+<td style="text-align:right;">
+748.5793207
+</td>
+<td style="text-align:right;">
+246.4763230
+</td>
+<td style="text-align:right;">
+3.037125
+</td>
+<td style="text-align:right;">
+0.0027434
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+region3
+</td>
+<td style="text-align:right;">
+1567.7863345
+</td>
+<td style="text-align:right;">
+274.7239403
+</td>
+<td style="text-align:right;">
+5.706770
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pov_rate_2019
+</td>
+<td style="text-align:right;">
+-9.9388900
+</td>
+<td style="text-align:right;">
+4.3225643
+</td>
+<td style="text-align:right;">
+-2.299304
+</td>
+<td style="text-align:right;">
+0.0226360
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+child_rate_2019
+</td>
+<td style="text-align:right;">
+-10.3829380
+</td>
+<td style="text-align:right;">
+4.3250191
+</td>
+<td style="text-align:right;">
+-2.400669
+</td>
+<td style="text-align:right;">
+0.0173841
+</td>
+</tr>
+</tbody>
+</table>
+<p>Our initial simplest model featured no transformations. The model summary showed an underwhelming R² value of 0.5389, along with extreme right skewed plots of the relationship between the variables. As seen above, the simple model does moderately well at explaining the possible relationship between the outcome and explanatory variables. A big worry was that the Asia &amp; Oceania region had a p-value that would have them be rejected for significantly adding to the model, given all else was equal. This concerned us as that region has the largest population, features a majority of underdeveloped countries, and was where the pandemic stemmed from.</p>
+<p>We felt that a transformation to the numerical variables may address the skewness and accommodate the p-values. After the transformation of the numerical X variables, we noticed that the plots had their skewness addressed but resulted in a decreased R² value of 0.5091. We also noticed that a plot of residuals were fanning out, as seen below, this encouraged us to attempt a transformation on Y.</p>
+<p><img src="POSTER-STAT-3240-Final-Submission-Code_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>With a fifth root transformation on Y, which was determined through a Box-Cox plot, we felt that we addressed the non-constant variance seen in the above plot. Along with the corrected plot, we noticed an increased R² value of 0.6232. Furthermore, as seen below, the p-values of our numerical variables now showed significant contribution to the model.</p>
+<table style="font-size: 0.9em; overflow-x: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+4.2056765
+</td>
+<td style="text-align:right;">
+0.2103863
+</td>
+<td style="text-align:right;">
+19.990259
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gdp_pcap_2019
+</td>
+<td style="text-align:right;">
+-0.0000078
+</td>
+<td style="text-align:right;">
+0.0000032
+</td>
+<td style="text-align:right;">
+-2.410873
+</td>
+<td style="text-align:right;">
+0.0169318
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+region1
+</td>
+<td style="text-align:right;">
+-0.3900889
+</td>
+<td style="text-align:right;">
+0.1678899
+</td>
+<td style="text-align:right;">
+-2.323480
+</td>
+<td style="text-align:right;">
+0.0212834
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+region2
+</td>
+<td style="text-align:right;">
+0.5530935
+</td>
+<td style="text-align:right;">
+0.1891589
+</td>
+<td style="text-align:right;">
+2.923961
+</td>
+<td style="text-align:right;">
+0.0039055
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+region3
+</td>
+<td style="text-align:right;">
+0.8304638
+</td>
+<td style="text-align:right;">
+0.2111065
+</td>
+<td style="text-align:right;">
+3.933862
+</td>
+<td style="text-align:right;">
+0.0001197
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pov_rate_2019
+</td>
+<td style="text-align:right;">
+-0.0130570
+</td>
+<td style="text-align:right;">
+0.0033390
+</td>
+<td style="text-align:right;">
+-3.910490
+</td>
+<td style="text-align:right;">
+0.0001308
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+child_rate_2019
+</td>
+<td style="text-align:right;">
+-0.0147182
+</td>
+<td style="text-align:right;">
+0.0033259
+</td>
+<td style="text-align:right;">
+-4.425377
+</td>
+<td style="text-align:right;">
+0.0000167
+</td>
+</tr>
+</tbody>
+</table>
+<p>Next, we assessed the normality of the error terms by looking at a QQ-Plot. Our error terms were approximately normally distributed, due to heavy tails in the QQ-Plot.</p>
+<p>We then fit a complex model where we added an interaction term between GDP and Poverty Rate. We observed a F-test with a p-value very close to 0 and a p-value associated with the interaction term of 0.000102, with 68.75% of the variation in total deaths being explained by this model.</p>
+<p>In addition, we added a quadratic term to our complex model. The p-value for the quadratic term was 0.00152, with 70.49% of the variation in total deaths being explained by this model, with a reasonable adjusted R squared explaing of 69.15% variation.</p>
+<p>To determine if our base model is better, we ran an Anova test between the base model and the one with the interaction term. Since we observed a p-value, 0.0001017, which is less than 0.05, we rejected the null hypothesis and concluded that our interaction model is significantly better at predicting total deaths compared to our simple model.</p>
+<p>Doing the same for our interaction model and the quadratic model, we observed a p-value of 0.001515 which meant we rejected the null hypothesis and concluded that the quadratic model was significantly better at predicting total deaths.</p>
+<p>After splitting our data into 4 models to assess the 4 different regions, we observed p-values associated with GDP, poverty and child rate that suggested there was no relationship between these predictors and total deaths.</p>
+<p>Within the Americas, the p-value associated with GDP is 0.782. However, in our models containing all regions, we see that these predictors are useful in predicting deaths. Conversely, within our simple model, the region of Asia &amp; Oceania would not significantly add to the model when compared to countries across the globe, however, when assessed independently within their region, these countries were significant to the model. This means that across a singular region, these predictors could be useful, but when looking at these predictors while considering all countries, they might help us predict total deaths.</p>
+<p>We validated our model by randomly splitting our data into a training sample and validation sample. We observed MSE values of 0.405 and 0.49 with MSPR values of 0.612 and 0.675 respectively. This showed that our model was moderate at predicting new observations from a countries GDP, child mortality rate and poverty rate, but not excellent.</p>
+<p><img src="POSTER-STAT-3240-Final-Submission-Code_files/figure-html/unnamed-chunk-44-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>From the Studentized Residuals plot, we can see that four countries deaths were significantly different from what we predicted. Those countries were China, Nicaragua and Samoa which had less total deaths than we had predicted, and Georgia which had more total deaths than predicted. This could be caused due to under reporting, age of the population, healthcare restrictions, etc. We also included added variable plots, and saw that our data was linear and our line of best fit goes through the heart of the data.</p>
+<p>In conclusion, we’ve found that the results are inconclusive and do not provide sufficient evidence to support or refute the hypothesis. We’ve seen that as GDP Per Capita went up, total deaths tended to marginally go down, which was hypothesised but that as Poverty Rate and Child Mortality Rate went down, totals deaths also tended to go down. Some limitations included the fact that countries may have had unreliable or incomplete data, which resulted from misclassification, lack of testing, or even overreporting of COVID-19. In addition, further studies could look into how different socio-economic factors (such as gender, race, etc) intersect with our variables.</p>
+</div>
+</div>
+
+</div>
+
+
+
+</body>
+</html>
